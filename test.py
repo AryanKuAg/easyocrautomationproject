@@ -1,7 +1,4 @@
 import re
-
-hahaDate = 'May-84'
-
-pattern1 = re.compile("\w\w\w-\d\d")
-
-print(pattern1.match(hahaDate))
+string1 = "498results 34should get"
+nothing = int(re.search(r'\d+', string1).group())
+print(nothing)
