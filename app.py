@@ -113,6 +113,8 @@ def ledgerFolioGenStepTwo(mydataList, stepOneList):
         
 # print(ledgerFolioGenStepTwo(myPreciousData, listOfListExcelDateEntryGenStepOne(myPreciousData)))
 
+
+# This function will give ['6-Mar-06', '27-Mar-06', '12-Mar-81', '3917', '270457', 'CLOSED'], ['6-Dec-04', '27-Dec-04', '13-Dec-79', '387', '270411', 'CLOSED'],
 def openCloseGen(mydataList, stepTwoList):
     tempList = [] # A list that holds closed and open
     # Criteria
@@ -128,10 +130,18 @@ def openCloseGen(mydataList, stepTwoList):
         elif b in i or d in i:
             tempList.append("OPEN")
 
-    
-    return tempList
+    # # A list with previous data
+    # allDataList = []
+
+    for i, ele in enumerate(stepTwoList):
+        if len(stepTwoList) - 1 == i:
+            continue
+
+        stepTwoList[i].append(tempList[i])
 
 
+    return stepTwoList
 
-haha = openCloseGen(myPreciousData, ledgerFolioGenStepTwo(myPreciousData, listOfListExcelDateEntryGenStepOne(myPreciousData)))
-print(haha)
+
+# haha = openCloseGen(myPreciousData, ledgerFolioGenStepTwo(myPreciousData, listOfListExcelDateEntryGenStepOne(myPreciousData)))
+# print(haha)
