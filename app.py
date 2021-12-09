@@ -492,18 +492,18 @@ def dateFormatter(mydataList):
                     if monthPattern.search(month):
                         tempSplittedList[myindex] = '12'
                 mydataList[i][index] = '-'.join(tempSplittedList)
-            else:
-                # ['6','Jan','34'] or [3, jan]
-                tempSplittedList = str(j).split('-')
+            # else:
+            #     # ['6','Jan','34'] or [3, jan]
+            #     tempSplittedList = str(j).split('-')
 
-                if str(tempSplittedList[-1]).startswith('0') or str(tempSplittedList[-1]).startswith('1') or str(tempSplittedList[-1]).startswith('2'):
-                    tempSplittedList[-1] = '20' + tempSplittedList[-1]
-                else:
-                    tempSplittedList[-1] = '19' + tempSplittedList[-1]
+            #     if str(tempSplittedList[-1]).startswith('0') or str(tempSplittedList[-1]).startswith('1') or str(tempSplittedList[-1]).startswith('2'):
+            #         tempSplittedList[-1] = '20' + tempSplittedList[-1]
+            #     else:
+            #         tempSplittedList[-1] = '19' + tempSplittedList[-1]
 
-                # tempSplittedList[1] = '01'
+            #     # tempSplittedList[1] = '01'
 
-                mydataList[i][index] = '-'.join(tempSplittedList)
+            #     mydataList[i][index] = '-'.join(tempSplittedList)
 
     return mydataList
 
@@ -525,7 +525,8 @@ print(refinedDataListWithDateFormatted)
 #         # OUR MAIN ISSUE
 #         # This loop is adding data to worksheet
 #         for index, element in enumerate(mydataList):
-#             ws.append(['', ])
+#             temp = mydataList[index]
+#             ws.append(['', temp[]])
 
 #     # ws.append([1,3,5,43])
 
