@@ -179,3 +179,28 @@ def getTheNameStepFour(mydataList, stepThreeList):
 # haha = getTheName(myPreciousData, openCloseGenStepThree(myPreciousData, ledgerFolioGenStepTwo(myPreciousData, listOfListExcelDateEntryGenStepOne(myPreciousData))))
 # print(haha)
 
+# This function will generate [['6-Mar-06', '27-Mar-06', '12-Mar-81', '3917', '270457', 'CLOSED', 'HARL', 'phanu_chowdary@yahoo_'], ['6-Dec-04', '27-Dec-04', '13-Dec-79', '387', '270411', 'CLOSED', 'POONAN PANDIT', 'oonampandit_1 3@rediffm &il.com 9323568824'],]
+def getEmailStepFive(mydataList, stepFourList):
+    # Pattern 
+    emailPattern = re.compile('[a-z1-9^@A-Z]')
+
+    # temp holding emails
+    tempEmails = []
+
+    # This loop generates that list
+    for i in mydataList:
+        if emailPattern.search(i) and "@" in i:
+            tempEmails.append(str(i).lower())
+
+    # This loop integrate all things together
+    for i, element in enumerate(stepFourList):
+        if len(tempEmails) - 1 <= i:
+            continue
+
+        stepFourList[i].append(tempEmails[i])
+
+    return stepFourList
+
+
+# haha = getEmailStepFive(myPreciousData, getTheNameStepFour(myPreciousData, openCloseGenStepThree(myPreciousData, ledgerFolioGenStepTwo(myPreciousData, listOfListExcelDateEntryGenStepOne(myPreciousData)))))
+# print(haha)
