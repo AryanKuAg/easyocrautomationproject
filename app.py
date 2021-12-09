@@ -1,3 +1,5 @@
+import enum
+from os import name
 import easyocr
 import re
 
@@ -145,3 +147,19 @@ def openCloseGen(mydataList, stepTwoList):
 
 # haha = openCloseGen(myPreciousData, ledgerFolioGenStepTwo(myPreciousData, listOfListExcelDateEntryGenStepOne(myPreciousData)))
 # print(haha)
+
+def getTheName(mydataList):
+    namePattern = re.compile('[a-z]')
+    for i, element in enumerate(mydataList):
+        if 0 == i:
+            continue
+
+        previousElement = mydataList[i -1]
+        nextElement = mydataList[i + 1]
+
+        if namePattern.search(i) and not '-' in i and not '@' in i and not ',' in i and not '.' in i and not ';' in i and not '"' in i and not "'" in i and not "=" in i and not "ale" in i:
+            if previousElement[0] == '2' or previousElement[0] == '3':
+                print(i)
+            
+
+getTheName(myPreciousData)
