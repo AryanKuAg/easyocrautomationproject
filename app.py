@@ -512,26 +512,86 @@ refinedDataListWithDateFormatted = dateFormatter(
     refinedDataListWithoutDateFormatted)
 
 
-print(refinedDataListWithDateFormatted)
+# print(refinedDataListWithDateFormatted)
 
 # THIS IS FOR EXCEL WORK ---- THIS IS FOR EXCEL WORK ---- THIS IS FOR EXCEL WORK
 
-# def excelGen(mydataList):
-#     try:
+def excelGen(mydataList):
 
-#         wb = Workbook()
-#         ws = wb.active
+    wb = Workbook()
+    ws = wb.active
 
-#         # OUR MAIN ISSUE
-#         # This loop is adding data to worksheet
-#         for index, element in enumerate(mydataList):
-#             temp = mydataList[index]
-#             ws.append(['', temp[]])
+    # OUR MAIN ISSUE
+    # This loop is adding data to worksheet
+    for index, element in enumerate(mydataList):
+        temp = mydataList[index]
+        listToAdd = ['', '', '', '', '', '', '', '',
+                     '', '', '', '', '', '', '', '', '', '']
 
-#     # ws.append([1,3,5,43])
+        for i, e in enumerate(element):
+            # print('this loop runs')
+            previousElement = element[i - 1]
+            # Adding date
+            if '-' in e and ('20' in e or '19 in e'):
+                if listToAdd[3] == '':
+                    listToAdd[3] = e
+                    continue
+                elif listToAdd[4] == '':
+                    listToAdd[4] = e
+                    continue
+                elif listToAdd[16] == '':
+                    listToAdd[16] = ''
+                    continue
 
-#         wb.save('result' + str(i)+'.xlsx')
-#         wb.remove()
+            # Adding numbers
+            if (len(e) == 10 or len(e) == 12):
+                if listToAdd[13] == '':
+                    listToAdd[13] = e
+                    continue
+                elif listToAdd[14] == '':
+                    listToAdd[14] = e
+                    continue
 
-#     except Exception as e:
-#         print("An exception occurred: ", e)
+            # Adding ledger
+            if (len(e) == 3 or len(e) == 4):
+                if listToAdd[1] == '':
+                    listToAdd[1] = e
+                    continue
+
+            # Adding folio
+            if len(e) == 6:
+                if listToAdd[2] == '':
+                    listToAdd[2] = e
+                    continue
+
+            # Adding closed and open
+            if e == "OPEN" or e == 'CLOSED':
+                if listToAdd[5] == '':
+                    listToAdd[5] = e
+                    continue
+
+            # Adding name
+            if previousElement == 'CLOSED' or previousElement == 'OPEN':
+                if listToAdd[6] == '':
+                    listToAdd[6] = e
+                    continue
+
+            # Adding Email
+            if '@' in e:
+                if listToAdd[15] == '':
+                    listToAdd[15] = e
+                    continue
+
+            # Adding address
+            if len(element) - 1 == i:
+                if listToAdd[7] == '':
+                    listToAdd[7] = e
+                    continue
+
+        # Appending final thing
+        ws.append(listToAdd)
+
+    wb.save('result.xlsx')
+
+
+excelGen(refinedDataListWithDateFormatted)
