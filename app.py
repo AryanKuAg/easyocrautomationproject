@@ -117,7 +117,7 @@ def ledgerFolioGenStepTwo(mydataList, stepOneList):
 
 
 # This function will give ['6-Mar-06', '27-Mar-06', '12-Mar-81', '3917', '270457', 'CLOSED'], ['6-Dec-04', '27-Dec-04', '13-Dec-79', '387', '270411', 'CLOSED'],
-def openCloseGen(mydataList, stepTwoList):
+def openCloseGenStepThree(mydataList, stepTwoList):
     tempList = [] # A list that holds closed and open
     # Criteria
     a = 'CLOSED'
@@ -148,18 +148,34 @@ def openCloseGen(mydataList, stepTwoList):
 # haha = openCloseGen(myPreciousData, ledgerFolioGenStepTwo(myPreciousData, listOfListExcelDateEntryGenStepOne(myPreciousData)))
 # print(haha)
 
-def getTheName(mydataList):
+# This function will generate [['6-Mar-06', '27-Mar-06', '12-Mar-81', '3917', '270457', 'CLOSED', 'HARL'], ['6-Dec-04', '27-Dec-04', '13-Dec-79', '387', '270411', 'CLOSED', 'POONAN PANDIT'],
+def getTheNameStepFour(mydataList, stepThreeList):
+    # Pattern
     namePattern = re.compile('[a-z]')
-    for i, element in enumerate(mydataList):
-        if 0 == i:
+
+    # This list holds ['HARL', 'POONAN PANDIT', 'ESHWANT NAGAR', 'OONAN NAGULA']
+    listOfNames = []
+
+    # This loop generates the element of above list
+    for index,i in enumerate(mydataList):
+        if len(mydataList) - 1 == index:
             continue
-
-        previousElement = mydataList[i -1]
-        nextElement = mydataList[i + 1]
-
+        previousElement = mydataList[index - 1]
+        nextElement = mydataList[index + 1]
         if namePattern.search(i) and not '-' in i and not '@' in i and not ',' in i and not '.' in i and not ';' in i and not '"' in i and not "'" in i and not "=" in i and not "ale" in i:
             if previousElement[0] == '2' or previousElement[0] == '3':
-                print(i)
+                listOfNames.append(str(i).upper())
+
+    # This loop create involved elements
+    for i, element in enumerate(stepThreeList):
+        if len(listOfNames) - 1 <= i:
+            continue
+        stepThreeList[i].append(listOfNames[i])
+        
+
+    return stepThreeList
             
 
-getTheName(myPreciousData)
+# haha = getTheName(myPreciousData, openCloseGenStepThree(myPreciousData, ledgerFolioGenStepTwo(myPreciousData, listOfListExcelDateEntryGenStepOne(myPreciousData))))
+# print(haha)
+
