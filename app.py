@@ -245,3 +245,49 @@ def getPhoneNumberStepSix(mydataList, stepFiveList):
 
 # haha = getPhoneNumberStepSix(myPreciousData, getEmailStepFive(myPreciousData, getTheNameStepFour(myPreciousData, openCloseGenStepThree(myPreciousData, ledgerFolioGenStepTwo(myPreciousData, listOfListExcelDateEntryGenStepOne(myPreciousData))))))
 # print(haha)
+
+# And Finally This function will extract the address
+def getAddresStepSeven(mydataList):
+
+    # Patterns
+    a = 'CLOSED'
+    b = 'OPEN'
+    c = 'closed'
+    d = 'open'
+    # Date pattern
+    pattern1 = re.compile("\d\d-\w\w\w-\d\d")  # 33-Mar-43
+    pattern2 = re.compile("\d-\w\w\w-\d\d")  # 5-Jul-34
+    pattern3 = re.compile("\d-\w\w\w\d")  # 6-Mar6
+    pattern4 = re.compile("\d-\w\w\w-\d")  # 4-mar-3
+    pattern5 = re.compile("\d\w\w\w-\d")  # 6mar-3
+    pattern6 = re.compile("-\w\w\w-\d")  # -Dec-06
+    pattern7 = re.compile("\d\d-\w\w\w- \d\d")  # 10-May- 12
+    pattern8 = re.compile("\d\d\w\w\w-\d\d")  # 24Aug-07
+    pattern9 = re.compile("\d-\w\w-\d")  # 4-Ap-0?
+    pattern10 = re.compile("\d\d-\w\w\w-\d")  # 13-Apr-0?
+    # Tracker
+    closedOpenTrackerRepetition = 0
+
+    # List of list that holds numbers [['8404275483', '9948345998'], ['9920545466'], ]
+    listOfListOfAddress = [[]]
+
+    # This loop generates the above list items
+    for i in mydataList:
+
+        # This thing to track the index of list
+        if a in i or c in i or b in i or d in i:
+            closedOpenTrackerRepetition = closedOpenTrackerRepetition + 1
+            listOfListOfAddress.append([])
+
+
+        if not 'CLOS' in i and not 'ale' in i and not 'OPEN' in i and not '@' in i and not (len(i) == 10 or len(i) == 12 or len(i) == 4 or len(i) == 6) and not 'lly' in i and not (pattern1.match(i) or pattern2.match(i) or pattern3.match(i) or pattern4.match(i) or pattern5.match(i) or pattern6.match(i) or pattern7.match(i) or pattern8.match(i) or pattern9.match(i) or pattern10.match(i) ) and not 'Tech' in i :
+            listOfListOfAddress[closedOpenTrackerRepetition].append(i)
+
+    # popping the first unnecessary element
+    listOfListOfAddress.pop(0)
+
+    return listOfListOfAddress
+               
+
+haha = getAddresStepSeven(myPreciousData)
+print(haha)
